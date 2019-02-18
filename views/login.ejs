@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<meta charset="utf-8">
+	<title>Drawing Game</title>
+	<link rel="stylesheet" href="./css/style_login.css" />
+	<link rel="stylesheet" href="./css/cssgeneral.css" />
+
+	<meta name="viewport" content="initial-scale=1.0">
+	<meta name="viewport" content="maximum-scale=1.0">
+	<script src="https://use.fontawesome.com/154e61ef98.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+	<% include notifications %>
+<div id="layer">
+	
+	<div id="fw" style="z-index: 100"></div>
+	
+	<div id="content">
+
+		<h1 class="nonselectible">Drawing Game</h1>
+		<h2 class="nonselectible"> version alpha 0.1.0</h2></h2>
+
+		<div id="login">
+			<form action="/login" method="post">
+				<p class="nonselectible p">connexion</p>
+				
+				<input name="pseudo" type="text" placeholder="Pseudo" maxlength="16"/>
+				<input name="password" type="password" placeholder="Mot de passe" minlength="4"/>
+				<input type="submit" value="se connecter">
+				<a href="#" id="register_button" class="swap"> créer un compte </a>
+			</form>
+		</div>
+		<div id="register">
+			<form action="/register" method="post">
+				<p class="nonselectible p">créer un compte</p>
+				<input name="pseudo" type="text" placeholder="Pseudo" maxlength="16" required />
+				<div class="limite" id="pseudo">
+					<p class="p">Nombre de caractères maximum: 16</p>
+				</div>
+				<input id="password_input" name="password" type="password" placeholder="Mot de passe" minlength="4" required />
+				<div class="limite" id="password">
+					<p class="p">Nombre de caractères minimum: 4</p>
+				</div>
+				<input name="password_confirm" type="password" placeholder="Confirmation" minlength="4" required />
+
+				<input type="submit" value="créer un compte">
+				<a href="#" id="login_button" class="swap"> j'ai déjà un compte </a>
+			</form>
+		</div>
+		<div id="changelog">
+			<p class="nonselectible">Pour la prochaine version :</p>
+			<ul>
+				<li class="nonselectible">Différents modes de jeux</li>
+				<li class="nonselectible">La gomme optionnelle</li>
+				<li class="nonselectible">Un bouton leave game</li>
+				<li class="nonselectible">Une interface encore plus pimpé</li>
+			</ul>
+			<p class="nonselectible">P.S : Tout bug peut être signalé sur le Discord : <a id="discord" target="_blank" href="https://discord.gg/sQmMeZ7">https://discord.gg/sQmMeZ7</a></p>
+		</div>
+	</div>
+
+	<footer>
+		<p class="nonselectible copyright">© 2017 BananaTierra, Tous droits réservés, Toute reproduction interdite.</p>
+	</footer>
+</div>
+	
+	<script type="text/javascript">
+
+	$("input[placeholder=Pseudo]").focus(function(ev) {
+		$("#pseudo").slideDown(200);
+	});
+
+	$("input[placeholder=Pseudo]").focusout(function(ev) {
+		$("#pseudo").slideUp(200);
+	});
+
+	$("#password_input").focus(function(ev) {
+		$("#password").slideDown(200);
+	});
+
+	$("#password_input").focusout(function(ev) {
+		$("#password").slideUp(200);
+	});
+
+	var reg = false
+
+	$("#register_button").click(function() {
+		reg = true
+
+		$("#login").fadeOut(200, function() {
+			$("#register").fadeIn(200)
+		})
+	})
+
+	$("#login_button").click(function() {
+		reg = false
+
+		$("#register").fadeOut(200, function() {
+			$("#login").fadeIn(200)
+		})
+	})
+
+	</script>
+	
+	
+	<!-- TEMPORAIRE-->
+	<script>
+		
+		var fwk = document.getElementById('fw')
+		
+		function Particle(color, x, y, vx, vy, a, size) {
+			this.color = color
+			this.x = x
+			this.y = y
+			this.vx = vx
+			this.vy = vy
+			this.a = a
+			this.s = Math.random() * 5 + 2 + size
+			this.d = true
+			this.live = setTimeout(() => {
+				this.d = false
+			}, Math.random() * 500 + 800)
+		}
+		
+		function Firework(colors, x, y) {
+			this.particles = []
+			var n = Math.random() * 20 + 20
+			
+			for (var i = 0; i < n ;  i++) {
+				let sz = Math.random() * 5;
+				this.particles.push(new Particle(colors[Math.round(Math.random()*colors.length)], 
+									400, 400, (Math.random() * 10) * (Math.random() < 0.5 ? 1 : -1),(Math.random() * 10) * (Math.random() < 0.5 ? 1 : -1), (Math.random() + 9) / 10, sz ))
+			}
+			
+			this.e = document.createElement('canvas')
+			this.e.width = 800;
+			this.e.height = 800;
+			this.e.style.position = "fixed"
+			this.e.style.top = (y - 400) + "px"
+			this.e.style.left = (x - 400) + "px"
+			this.e.style.height = "800px"
+			this.e.style.width = "800px"
+			this.e.style.backgroundColor = "transparent"
+			
+			this.ctx = this.e.getContext("2d")
+
+			this.del = false
+			fwk.appendChild(this.e)
+			
+		
+			
+			this.update = function() {
+
+				this.ctx.clearRect(0, 0, 800, 800)
+
+				for (var pt of this.particles) {
+					if (pt.d) {
+						pt.x += pt.vx
+						pt.y += pt.vy				
+						pt.vx *= pt.a
+						pt.vy *= pt.a
+						
+						this.ctx.fillStyle = pt.color
+						this.ctx.beginPath();
+						this.ctx.arc(pt.x,pt.y,pt.s,0,2*Math.PI);
+						this.ctx.fill()
+					}
+				}
+			}
+			
+			
+			
+			this.timeout = setTimeout(() => {
+				this.e.parentNode.removeChild(this.e);
+				this.del = true
+			}, Math.random() * 500 + 1000)
+		}
+		
+		
+		var fw = []
+		var col = [
+				["#ff4800", "#ff8300", "#ffe100"],
+				["#32ff00", "#00ff65", "#00ffbb"],
+				["#6600ff", "#c700ff", "#ff00bf"]
+				
+			];
+		
+		function step() {
+			
+			if (Math.random() * 100 < 3) {
+				fw.push(new Firework(col[(Math.floor(Math.random() * col.length))], Math.random() * window.innerWidth, Math.random() * window.innerHeight))
+			}
+			
+			for(var i = 0; i < fw.length; i++) {
+				if(fw[i].del == false) fw[i].update()
+			}
+			
+			requestAnimationFrame(step)
+		}
+		
+		requestAnimationFrame(step)
+		
+	</script>
+</body>
+</html>

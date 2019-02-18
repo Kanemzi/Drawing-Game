@@ -1,0 +1,552 @@
+/*
+DOCUMENT
+    - Document: feuille css game.ejs
+    - Version: 1.0
+    - Auteur: Alan
+    - Date créa: 05/12/2017
+    - Date modif: 07/12/2017
+
+TODO LIST :
+    - mettre un order pour chaque .user => position du classement
+    - styliser les scrollbars (à faire pour Firefox, Opéra et Edge)
+*/
+
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+	width: 5px;
+	height: 5px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+	/*border-radius: 10px;*/
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: #555;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+input {
+    text-align: left;
+}
+
+.application {
+    width: 1350px;
+    height: 100%;
+    max-height: 1400px;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+/***********************************
+        Block gauche
+***********************************/
+
+.left {
+    width: 350px;
+    order: 1;
+}
+
+.title {
+    display: flex;
+    height: 8%;
+
+    color: #5995f7;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+}
+
+/*** Tableau des scores ***/
+.scoreboard {
+    display: flex;
+    flex-direction: column;
+    height: 92%;
+    margin: 0 10px;
+
+
+    overflow-y: auto;
+}
+
+.user {
+    border: 2px solid #BBBBBB;
+    border-bottom: none;
+
+    background-color: #f3f3f3;
+}
+
+.guessed {
+    color: #26429B;
+}
+
+.drawer {
+    color: #AF0500;
+}
+
+.user_disconnected {
+    background-color: #bbb;
+}
+
+.user:last-child {
+    border-bottom: 2px solid #BBBBBB;
+}
+
+.user_avatar {
+    height: 100%;
+    width: 50px;
+    margin-right: 8px;
+    float: left;
+
+    background-color: white;
+}
+
+.user_avatar::before,
+.user_avatar::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.user_info {
+    position: relative;
+    margin: 8px;
+}
+
+.user_name {
+    font-weight: bold;
+}
+
+.user_level {
+    position: absolute;
+    right: 0;
+}
+
+.user_party {
+    position: relative;
+    margin: 0 8px 8px 8px;
+}
+
+.user_score {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.user_rank {
+    position: absolute;
+    right: 0;
+
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 20px;
+}
+
+/***********************************
+        Block milieu
+***********************************/
+
+.middle {
+    width: 800px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    order: 2;
+
+
+    position: relative;
+}
+
+canvas.primary_area {
+    width: 100%;
+    background-color: white;
+    border: 1px solid #BBBBBB;
+}
+
+#cursor_layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+}
+
+#cursor_layer:hover {
+    cursor: none;
+}
+
+
+
+
+#state_layer {
+    background-color: rgba(89, 149, 247, 0.2);
+    position: absolute;
+	width:  100%;
+	height: 450px;
+	top: 0;
+	left: 0;
+	display: none;
+}
+
+#state_message {
+    background-color:  rgba(38, 66, 155, 0.8);
+	position:  absolute;
+	top: 20%;
+	width:  100%;
+	height: 60%;
+	left:  0px;
+}
+
+#state_message p {
+    color:  #eee;
+    font-size:  2em;
+	text-align:  center;
+	width: 100%;
+	position: absolute;
+	top: 10%;
+}
+
+#state_choice {
+    position:  absolute;
+	top: 30%;
+	width:100%;
+}
+
+#state_choice ul {
+    margin: auto;
+    text-align:  center;
+}
+
+#state_choice li {
+    background-color: #eee;
+    width: 12%;
+    color: #555;
+    padding: 8px;
+    text-align:  center;
+    display: inline-block;
+    margin: 1.5%;
+    cursor:  pointer;
+    border-radius: 4px;
+}
+
+#state_mcontent
+{
+    line-height: 2em;
+    vertical-align: middle;
+}
+
+
+.activity {
+    flex: 1;
+    position: relative;
+}
+
+.info {
+    width: 100%;
+    margin: 10px 0 0;
+
+    background-color: white;
+	font-size: 2em;
+	display: inline-block;
+	text-align: center;
+}
+
+#info1
+{
+	width: 60%;
+}
+
+#info2
+{
+	width: 20%;
+    background-color: #f3f3f3;
+}
+
+#info3
+{
+	width: 20%;
+}
+
+.chat_container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #BBBBBB;
+
+    background-color: white;
+}
+
+.chat {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    padding: 8px;
+
+    overflow-y: auto;
+}
+
+.message {
+    margin-bottom: 5px;
+}
+
+.server_message {
+    font-weight: bold;
+}
+
+.sender {
+    font-weight: bold;
+}
+.sender:after{
+    content: ' dit :';
+}
+
+.message_text {
+    width: 100%;
+    height: 40px;
+    padding: 0 4px;
+
+    border-radius: 0;
+
+    background-color: #f3f3f3;
+}
+
+/***********************************
+        Block droit
+***********************************/
+
+.right {
+    width: 200px;
+    position: relative;
+    order: 3;
+
+}
+
+.tools {
+    width: 186px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 37px;
+    padding: 2px;
+    
+    background-color: #f3f3f3;
+    
+    border: 2px solid #BBBBBB;
+    border-radius: 4px;
+}
+
+.colors {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.colors .color_white {background-color: #fff;}
+.colors .color_lemon {background-color: #feed01;}
+.colors .color_indianred {background-color: #e53e36;}
+.colors .color_raspberry {background-color: #d45988;}
+.colors .color_purple {background-color: #b05090;}
+.colors .color_plum {background-color: #534382;}
+.colors .color_mint {background-color: #43b9c3;}
+.colors .color_tropicalgreen {background-color: #2a9f34;}
+.colors .color_blue {background-color: #007bb7;}
+.colors .color_flesh {background-color: #f3d6c4;}
+.colors .color_chocolate {background-color: #5d372c;}
+.colors .color_black {background-color: #000;}
+.colors .color_pinegreen {background-color: #007d67;}
+.colors .color_grey {background-color: #e2dfdA;}
+.colors .color_cognac {background-color: #df8956;}
+.colors .color_shinyblue {background-color: #25378b;}
+
+.colors .selected {
+    border: 6px solid black;
+}
+
+.colors .color_black.selected {
+    border: 6px solid #bbb;
+}
+
+.function {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    /*margin-top*/
+}
+
+.function > .item {
+    margin: 9px;
+    background-color: #f3f3f3;
+    border: 2px solid #BBBBBB;
+    border-radius: 4px;
+}
+
+.item {
+    width: 40px;
+    height: 40px;
+    margin: 2px;
+
+    background-color: white;
+}
+
+.empty {
+    position: absolute;
+    bottom: 0;
+
+    background-color: white;
+}
+
+.pensize {
+    width: 100%;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #BBBBBB;
+    border-radius: 4px;
+}
+
+.empty {
+    display: none;
+}
+
+#start_game, #bt_dl_canvas, #dl_canvas, #quit_game
+{
+    width: 100%;
+}
+
+#dl_canvas, #quit_game {
+    margin-top: 3px;
+    display: block;
+}
+
+#bt_dl_canvas, #dl_canvas
+{
+    width: 100%;
+}
+
+#quit_game {
+    background-color: #AF0500;
+    color: white;
+}
+
+#quit_game:hover {
+    background-color: #D10600;
+}
+
+#start_game {
+    background-color: #F8E205;
+}
+
+#start_game:hover {
+    background-color: #ffee4c;
+}
+
+#bt_dl_canvas:hover {
+    background-color: #cecece;
+}
+
+@media screen and ( max-width: 1155px ) and ( min-width: 1061px ) {
+    .left
+    {
+        width: 200px;
+    }
+}
+
+@media screen and ( max-width: 1060px ){
+    .left
+    {
+        width: 250px;
+    }
+
+    .title
+    {
+        font-size: 10px;
+    }
+}
+
+@media screen and ( max-height: 750px ){
+    .chat_container {
+        /*position: inherit;
+        flex: 1;*/
+    }
+    .title {
+        height: 18%;
+    }
+    .scoreboard {
+        height: 82%;
+    }
+}
+
+@media screen and ( max-height: 650px ){
+    .chat_container {
+        height: 40%;
+    }
+    .message_text {
+        height: 20px;
+    }
+}
+
+@media screen and ( max-height: 530px ){
+    .chat_container {
+        display: none;
+    }
+}
+
+@media screen and ( max-width: 1350px ){
+    .application {
+        width: 1150px;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: flex-start;
+    }
+    .middle {
+        order: 3;
+    }
+    .right {
+        order: 2;
+        height: 50%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .left {
+        height: 50%;
+    }
+    .empty {
+        display: none;
+    }
+}
+
+@media all and (max-width: 800px)
+{
+    body
+    {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .left
+    {
+        display: none;
+    }
+
+    .right
+    {
+        display: none;
+    }
+
+    .middle
+    {
+        width: 100vw;
+    }
+}

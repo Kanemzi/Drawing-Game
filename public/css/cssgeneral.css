@@ -1,0 +1,196 @@
+/* * * * * * * * * * * * * * * * *
+            Général
+ * * * * * * * * * * * * * * * * */
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+
+* {
+    -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Indie Flower';
+}
+
+.nonselectible
+{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body
+{
+    background-image: url(../img/bg_dragon.jpg);
+    background-repeat: no-repeat;
+    background-size: 100vw;
+}
+
+#content
+{
+    position: relative;
+    z-index: 2000;
+    padding: 3%;
+    padding-top: 2.5%;
+    background-image: url(../img/border2.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    margin: auto;
+    display: block;
+    vertical-align: middle;
+    border-radius: 8px;
+       
+    width: 650px;
+    height: 650px;
+}
+
+@media only screen and (min-height: 801px) 
+{
+    #content
+    {
+        margin-top: 6%;
+    }
+}
+
+@media only screen and (max-height: 800px) 
+{
+    #content
+    {
+        margin-top: 2%;
+    }
+}
+
+@font-face {
+    font-family: 'Pocket';
+    src: url('../font/Pocket.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* * * * * * * * * * * * * * * * *
+            Les inputs
+ * * * * * * * * * * * * * * * * */
+ 
+::placeholder
+{
+    text-align: center;
+}
+
+input[type="submit"],
+button
+{
+    padding: 3px;
+    width: 30%;
+    background-color: #f3f3f3;
+}
+
+input[type="submit"]:hover,
+button:hover
+{
+    background-color: #5995f7;
+}
+
+input,
+button
+{
+    border: 1px solid #BBBBBB;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 1em;
+}
+
+/* * * * * * * * * * * * * * * * *
+            Bas de la page
+ * * * * * * * * * * * * * * * * */
+
+footer
+{
+    text-align: center;
+    color: #BBBBBB;
+    position:absolute;
+    bottom:0;
+}
+
+.copyright
+{
+    text-align: center;
+    color: black;
+    vertical-align: bottom;
+    font-size: 0.8em;
+}
+
+/* * * * * * * * * * * * * * * * *
+            POur mobile
+ * * * * * * * * * * * * * * * * */
+
+@media all and (max-width: 1200px)
+{
+    #content
+    {
+        margin-top: 0px;
+        width: 100%;
+        height: 100vh;
+        border-radius: 0px;
+        
+    }
+    
+    footer
+    {
+        display: none;
+    }
+}
+
+/* * * * * * * * * * * * * * * * *
+            Notifications
+ * * * * * * * * * * * * * * * * */
+
+#notifications {
+    z-index: 1000;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    font-size: 0.8em;
+}
+
+.close {
+    font-size: 2em;
+    float: right;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    top: 0px;
+    right: 0px;
+}
+
+.notification {
+    width: 200px;
+    height: 40px;
+    border: 1px solid;
+    border-radius: 2px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.type0 { /* notification d'erreur */
+    background-color: #FFBBBB;
+    border-color: #FF0000;
+}
+
+.type0 .close {color: #880000;}
+
+.type1 { /* notification d'information */
+    background-color: #BBBBFF;
+    border-color: #0000FF;  
+}
+
+.type1 .close {color: #000088;}
+
+.type2 { /* notification de succès */
+    background-color: #BBFFBB;
+    border-color: #00FF00;
+}
+
+.type2 .close {color: #008800;}

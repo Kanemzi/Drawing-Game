@@ -1,0 +1,13 @@
+{
+  "name": "drawing game iut info nantes",
+  "version": "0.1.0",
+  "description": "jeu de dessin",
+  "main": "server.js",
+  "repository": "https://gitlab.com/bananatierra/drawing-game",
+  "author": "Bananatierra",
+  "dependencies": {
+    "async": "~0.2.8",
+    "express": "~3.2.4",
+    "socket.io": "^2.0.4"
+  }
+}

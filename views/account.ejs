@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Drawing Game</title>
+    <link rel="stylesheet" href="./css/style_account.css" />
+    <link rel="stylesheet" href="./css/cssgeneral.css" />
+
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta name="viewport" content="user-scalable=no">
+
+    <script src="https://use.fontawesome.com/154e61ef98.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <% include notifications %>
+
+        <div id="content">
+
+            <div id="user_info">
+                <div id="name">
+                    <h2 class="nonselectible">
+                        <%= pseudo %>
+                    </h2>
+                </div>
+                <div id="user_level" class="nonselectible">( lvl
+                    <%= level %> )</div>
+            </div>
+            <nav class="nonselectible">
+                <div class="selected" id="games_b">parties</div><div id="stats_b">statistiques</div><div id="settings_b">paramètres</div>
+            </nav>
+            <div class="tab" id="games">
+                <form action="account/create_room" method="post">
+                    <fieldset>
+                        <legend class="nonselectible">Créer une partie</legend>
+
+                        <div>
+                            <span class="create">
+							<input type="text" name="game_name" placeholder="nom de la partie" />
+						</span>
+                            <span class="create">
+							<span>
+								<input type="checkbox" name="game_private" id="game_private"/><label for="game_private" class="nonselectible">privée ? </label>
+							</span>
+                            <span>
+								<input type="password" name="game_password" id="game_password" placeholder="mot de passe" tooltip="bla" disabled />
+							</span>
+                            </span>
+                        </div>
+
+                        <div id="options">
+                            <span class="option create">
+							<label for="game_mode" class="nonselectible">Mode de jeu</label>
+							<select id="game_mode" name="game_mode">
+								<option value="Normal" selected >Normal</option>
+								<!--<option value="Duel" >Duel</option>
+								<option value="Aveugle" >Aveugle</option>-->
+							</select>
+							<!--<input type="checkbox" name="game_battle" id="game_battle"/><label for="game_battle" class="nonselectible">Mode Bataille</label>-->
+						</span>
+                            <span class="create" id="create">
+							<input type="submit" value="créer" />
+						</span>
+                        </div>
+                    </fieldset>
+                </form>
+
+
+                <fieldset id="join_game">
+                    <legend class="nonselectible" id="field_join">Rejoindre une partie</legend>
+
+                    <div id="table_games">
+                        <span id="nom_game" class="nonselectible">Nom de la partie</span>
+                        <span id="prive" class="nonselectible">Privée ?</span>
+                        <div class="parties" id="roomList">
+                            <% include roomList %>
+                        </div>
+                    </div>
+
+                    <button type="button" class="refresh" id="refresh">
+					<i class="fa fa-refresh"  id="refresh_button" aria-hidden="true"></i>
+					Refresh
+				</button>
+                </fieldset>
+
+            </div>
+            <div class="tab" id="stats">
+                <div id="infos_user">
+                    <ul class="nonselectible">
+                        <li>XP :
+                            <%= xp %> pts</li>
+                        <li>Banana Coins :
+                            <%= thune %>
+                        </li>
+                        <li>Parties jouées :
+                            <%= nb_play %>
+                        </li>
+                        <li>Parties gagnées :
+                            <%= nb_win %>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab" id="settings">
+                <form action="account/change_password" method="post">
+                    <div id="changermdp">
+                        <input type="checkbox" name="change_password" id="change_password" /><label for="change_password" class="nonselectible">Changer de mot de passe</label>
+                        <input type="password" name="ancienmdp" id="ancienmdp" placeholder=" ancien mot de passe" tooltip="bla" disabled required/>
+                        <input id="nouvmdp" name="nouvmdp" type="password" placeholder="Nouveau mot de passe" minlength="4" disabled required />
+                        <input id="confirmation" name="confirmation" type="password" placeholder="Confirmation" minlength="4" disabled required />
+                        <input type="submit" id="changer" value="Changer" disabled>
+                    </div>
+                </form>
+            </div>
+
+            <div id="deco">
+                <a href="/logout">
+                    <button class="deconnexion">
+					<i class="fa fa-sign-out" aria-hidden="true"></i>
+					Déconnexion
+				</button>
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            <p class="nonselectible copyright">© 2017 BananaTierra, Tous droits réservés, Toute reproduction interdite.</p>
+        </footer>
+
+
+        <script type="text/javascript">
+            // tabs
+            var currentPannel = $("#games")
+
+            $("#games_b").click(function() {
+                $(this).addClass("selected")
+                $("#stats_b").removeClass("selected")
+                $("#settings_b").removeClass("selected")
+
+                if (currentPannel != $("#games")) {
+                    currentPannel.hide()
+                    currentPannel = $("#games")
+                    currentPannel.show();
+                }
+            })
+
+            $("#stats_b").click(function() {
+                $(this).addClass("selected")
+                $("#games_b").removeClass("selected")
+                $("#settings_b").removeClass("selected")
+
+                if (currentPannel != $("#stats")) {
+                    currentPannel.hide()
+                    currentPannel = $("#stats")
+                    currentPannel.show();
+                }
+            })
+
+            $("#settings_b").click(function() {
+                $(this).addClass("selected")
+                $("#stats_b").removeClass("selected")
+                $("#games_b").removeClass("selected")
+
+                if (currentPannel != $("#settings")) {
+                    currentPannel.hide()
+                    currentPannel = $("#settings")
+                    currentPannel.show();
+                }
+            })
+
+            // create game
+            $("#game_private").click(function() {
+                $("#game_password").prop("disabled", !$("#game_private").prop("checked"))
+            })
+
+
+            //change password
+            $("#change_password").click(function() {
+                $("#ancienmdp").prop("disabled", !$("#change_password").prop("checked"))
+                $("#nouvmdp").prop("disabled", !$("#change_password").prop("checked"))
+                $("#confirmation").prop("disabled", !$("#change_password").prop("checked"))
+                $("#changer").prop("disabled", !$("#change_password").prop("checked"))
+            })
+
+
+            //refresh des parties
+            $("#refresh").click(function() {
+
+                    var icon = $(this).find("i")
+                    icon.addClass("fa-spin");
+
+                    $.ajax({
+                        url: "account/refresh_rooms",
+                        type: "POST"
+                    }).done(function(res) {
+                        setTimeout(function() {
+                            document.getElementById("roomList").innerHTML = res
+                            icon.removeClass("fa-spin");
+                        }, 300)
+                    })
+                })
+                /*
+	// display room password input
+	$(".partie").click(function() {
+	$(".mdp_game").animate({ width: "hide" }, 100)
+	var pass = $(this).find(".mdp_game").animate({ width: "show" }, 100)
+})*/
+        </script>
+</body>
+
+</html>

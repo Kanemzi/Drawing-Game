@@ -1,0 +1,363 @@
+/* * * * * * * * * * * * * * * * *
+            Joueur
+ * * * * * * * * * * * * * * * * */
+
+h2 {
+    display: inline-block;
+    font-size: 2.5em;
+}
+
+#name
+{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+#user_level
+{
+    display: inline-block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#user_info
+{
+    text-align: center;
+}
+
+/* * * * * * * * * * * * * * * * *
+                Nav
+ * * * * * * * * * * * * * * * * */
+ 
+nav {
+    margin: auto;
+    margin-top: 1.5%;
+    
+    padding: 0px;
+    background-color: #f3f3f3;
+    border: 1px solid #BBBBBB;
+    border-radius: 4px;
+    width: 100%;
+    height: 5%;
+    text-align: left;
+    vertical-align: middle;
+}
+
+nav div {
+    height: 24px;
+    display: inline-block;
+    width: 33.33%;
+    text-align: center;
+    cursor: pointer;
+}
+
+nav div:hover, nav div[class="selected"] {
+    background-color: #5995f7;
+}
+
+/* * * * * * * * * * * * * * * * *
+               Table 
+ * * * * * * * * * * * * * * * * */
+
+.tab{
+    position: relative;
+    top: -2px;
+    width: 100%;
+    height: 75%;
+    background-color: #f3f3f3;
+    border: 1px solid #BBBBBB;
+    border-radius: 4px;
+    padding: 5%;
+}
+
+#stats, #settings {
+    display: none;
+}
+
+#games {
+    padding: 5px;
+}
+
+.deconnexion
+{
+    margin: 5px;
+    float: right;
+    vertical-align: top;
+    width: 30%;
+}
+
+#deco
+{
+    margin-top: 0px;
+}
+
+/* * * * * * * * * * * * * * * * *
+            table game
+ * * * * * * * * * * * * * * * * */
+
+.create
+{
+    margin-left: 11%;
+    width: 100%;
+}
+
+#create
+{
+    margin-left: 6%;
+}
+
+#game_password
+{
+    width: 20%;
+    display: inline-block;
+}
+
+fieldset
+{
+    padding: 1%;
+    border: 1px solid #BBBBBB;
+    border-radius: 10px;
+    width: 100%;
+}
+
+/* * * * * * * * * * * * * * * * *
+            game option
+ * * * * * * * * * * * * * * * * */
+#options
+{
+    margin-top: -20px;
+}
+
+.option
+{
+    display: inline-block;
+    width: 40%;
+}
+
+/* * * * * * * * * * * * * * * * *
+            game parties
+ * * * * * * * * * * * * * * * * */
+
+#table_games
+{
+    padding: 0.5%;
+    border: 1px solid #BBBBBB;
+    background: #f3f3f3;
+    border-radius: 4px;
+    height: 210px;
+    
+}
+
+.parties
+{
+    display: flex;
+    flex-direction: column;
+    height: 180px;
+    margin: 0px;
+    
+    background-color: white;
+    
+    overflow-y: scroll;
+}
+
+.partie
+{
+    border: 1px solid #BBBBBB;
+    background-color: white;
+    padding: 2px;
+    padding-right: 5px;
+    font-size: 0.9em;
+}
+
+.partie:nth-child(odd) 
+{
+    background-color: #DDDDDD; 
+}
+
+.partie:hover {
+    background-color: #CCC;
+}
+
+.partie .lock input {
+    margin-top: 0px;
+    display: inline-block;
+    width: 0px;
+    opacity: 0;
+    transition: all 0.2s;
+}
+
+.partie:hover .lock input, .lock input:focus {
+    margin-top: 0px;
+    opacity: 1;
+    width: 160px;
+}
+/*
+div {
+	width: 90px; height: 90px;
+	margin: 3em;
+	background: #fff;
+	border: 20px solid #aaa;
+	border-radius: 30px;
+	transition: all 2s;  
+}
+div:hover {
+	border-color: #333;
+	transform: rotate(1080deg);
+	border-radius: 50%;
+}*/
+
+
+.refresh
+{
+    margin-top: 6px;
+    float: right;
+}
+
+#prive
+{
+    float: right;
+}
+
+.lock
+{
+    float: right;
+}
+/*
+.mdp_game
+{
+    float: right;
+    width: 160px;
+}*/
+
+/* * * * * * * * * * * * * * * * *
+            table stats
+ * * * * * * * * * * * * * * * * */
+
+#infos_user
+{
+    text-align: left;
+    margin-left: 10%;
+}
+
+#infos_user li
+{
+    margin: 4%;
+    list-style: none;
+}
+
+/* * * * * * * * * * * * * * * * *
+            table settings
+ * * * * * * * * * * * * * * * * */
+
+#changermdp input[type="submit"]
+{
+    width: 35%;
+}
+
+/* * * * * * * * * * * * * * * * *
+            Inputs
+ * * * * * * * * * * * * * * * * */
+
+input {
+    margin-top: 5px;
+}
+
+input[type="text"]
+{
+    margin-bottom: 10px;
+}
+
+input[type="number"]
+{
+    padding: 2px;
+    width: 40px;
+    height: 30px;
+}
+
+input[type="submit"],
+input[type="text"],
+input[type="password"],
+button
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.create input[type="submit"],
+.create input[type="text"],
+.create input[type="password"],
+.create button
+{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input[type="submit"]
+{
+    margin-top: 20px;
+}
+
+input[type="checkbox"]:checked,
+input[type="checkbox"]:not(:checked)
+{
+    margin: 2px;
+    border-radius: 10px;
+    height: 15px;
+    width: 15px;
+    background: #fff;
+    border: 1px solid #BBBBBB;
+    vertical-align: middle;
+}
+
+input[type="checkbox"]:not(:checked)
+{
+    background: #BBBBBB;
+}
+
+label
+{
+    margin: 2px; 
+}
+
+/* * * * * * * * * * * * * * * * *
+            Pour mobile
+ * * * * * * * * * * * * * * * * */
+
+@media all and (max-width: 800px)
+{
+    input
+    {
+        width: 90%;
+    }
+    
+    .deconnexion
+    {
+        width: 50%;
+    }
+    
+    #game_password
+    {
+        width: 45%;
+    }
+    
+    .option
+    {
+        font-size: 0.8em;
+    }
+    
+    .create
+    {
+        margin-left: 20%;
+    }
+}
+
+.nom_createur
+{
+    font-style: italic;
+    color: gray;
+    font-size: 0.8em;
+}

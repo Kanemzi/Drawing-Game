@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="/css/cssgeneral.css" />
+	<link rel="stylesheet" href="/css/game.css" />
+
+	<title>Drawing - <%= room_name %> </title>
+
+	<script src="https://use.fontawesome.com/154e61ef98.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+
+	<div id="notifications">
+		<!-- zone de notifications par socket -->
+	</div>
+
+	<div class="application">
+		<div class="left">
+			<div class="title nonselectible">
+				<h1>Drawing Game</h1>
+			</div>
+			<div class="scoreboard nonselectible">
+				<!-- Faire apparaître les joueurs ici -->
+			</div>
+		</div>
+		<div class="middle">
+			<canvas id="drawing_canvas" class="primary_area" width="1280" height="720"> Erreur </canvas>
+			<canvas id="cursor_layer" class="primary_area" width="1280" height="720"> Erreur </canvas>
+
+
+			<div id="state_layer">
+
+			    <div id="state_message">
+			    	<p class="nonselectible">Choisissez un temps de dessin</p>
+			    </div>
+
+			    <div id="state_choice nonselectible">
+				    <ul class="nonselectible">
+				        <li class="nonselectible">10</li>
+				        <li class="nonselectible">20</li>
+				        <li class="nonselectible">30</li>
+				        <li class="nonselectible">40</li>
+				        <li class="nonselectible">60</li>
+				    </ul>
+				</div>
+
+			</div>
+
+			<div class="activity">
+				<div id="infobar">
+					<div class="info nonselectible" id="info1">
+					</div><div class="info nonselectible" id="info2">
+					</div><div class="info nonselectible" id="info3">
+					</div>
+				</div>
+				<div class="chat_container">
+					<div class="chat">
+						<!-- les messages des joueurs -->
+					</div>
+					<form action="" id="message_send">
+						<input type="text" class="message_text">
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="right">
+			<div class="tools">
+				<div class="colors">
+					<div class="item color_white"></div>
+					<div class="item color_lemon"></div>
+					<div class="item color_indianred"></div>
+					<div class="item color_raspberry"></div>
+					<div class="item color_purple"></div>
+					<div class="item color_plum"></div>
+					<div class="item color_mint"></div>
+					<div class="item color_tropicalgreen"></div>
+					<div class="item color_blue"></div>
+					<div class="item color_flesh"></div>
+					<div class="item color_chocolate"></div>
+					<div class="item color_pinegreen"></div>
+					<div class="item color_grey"></div>
+					<div class="item color_cognac"></div>
+					<div class="item color_shinyblue"></div>
+					<div class="item selected color_black"></div>
+				</div>
+				<input class="pensize" type="range" min="2" max="60" value="6">
+				<div class="function">
+					<div class="item brush"><img src="../img/paintbrush.svg" alt="Une petite image de pinceau"></div>
+					<div class="item bigbrush"><img src="../img/bigpaintbrush.svg" alt="Une petite image de gros pinceau"></div>
+					<div class="item rubber"><img src="../img/rubber.svg" alt="Une petite image de gomme"></div>
+				</div>
+
+				<% if (owner) { %>
+				<div>
+					<button id="start_game">START GAME !</button>
+					<a id="dl_canvas" download="dessin.png"><button id="bt_dl_canvas" onclick="download()">Télécharger l'image !</button></a>
+					<button id="quit_game" onclick="document.location.href='/account'">Quitter</button>
+				</div>
+				<% } %>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script>
+
+	function download(){
+		var download = document.getElementById("dl_canvas")
+		var image = document.getElementById("drawing_canvas").toDataURL("image/png")
+                    .replace("image/png", "image/octet-stream")
+			  download.setAttribute("href", image)
+	}
+
+	// votre token de connexion à la room : Ne le partagez pas !
+	var join_token = "<%= join_token %>"
+
+	// votre nom d'utilisateur : Vous pouvez le partager mais ça sert à rien
+	var name = "<%= name %>"
+
+	// le token de la room actuelle
+	var room = "<%= room %>"
+
+	var socket_address = "<%= server_addr %><% if (socket_port != 80) { %>:<%= socket_port %><% } %>"
+
+	</script>
+	<script src="/js/connection.js"></script>
+	<script src="/js/chat.js"></script>
+	<script src="/js/canvas.js"></script>
+	<script src="/js/gamemode.js"></script>
+	<script src="/js/game_modes/warm_up.js"></script>
+	<script src="/js/game_modes/normal.js"></script>
+</body>
+</html>

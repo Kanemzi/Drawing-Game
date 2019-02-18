@@ -1,0 +1,120 @@
+/* * * * * * * * * * * * * * * * *
+        Haut de la page
+ * * * * * * * * * * * * * * * * */
+
+h1{
+    font-size: 5em;
+    margin-bottom: 3%;
+    color: #5995f7;
+    text-align: center;
+}
+
+h2{
+    font-size: 2em;
+    margin-bottom: 0%;
+    color: #5995f7;
+    text-align: center;
+}
+
+.p
+{
+    font-size: 2em;
+    color: black;
+}
+
+#discord
+{
+    text-decoration: none;
+}
+
+#discord:hover
+{
+    text-decoration: underline;
+}
+
+#changelog
+{
+    margin-top: 4.5%;
+    width: 100%;
+    font-size: 1em;
+    color: #5995f7;
+}
+
+/* * * * * * * * * * * * * * * * *
+            Javascript
+ * * * * * * * * * * * * * * * * */
+
+.swap {
+    display: block;
+    margin-top: 3.5%;
+    text-decoration: none;
+    color: #26429b;
+    font-size: 1em;
+}
+
+.alert
+{
+    color: red;
+    font-size: 1.5em;
+    margin: 5%;
+    text-align: center;
+}
+
+.limite
+{
+    border-radius: 10px;
+    width: 45%;
+    background: #DDDDDD;
+    border: 1px solid #BBBBBB;
+    margin-bottom: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+    
+    font-size: 0.3em;
+    text-align: center;
+}
+
+/* * * * * * * * * * * * * * * * *
+            login
+ * * * * * * * * * * * * * * * * */
+ 
+#content input:first-of-type
+{
+    margin-top: 4%;
+}
+
+
+#login_button {
+    margin-top: 1.5%;
+}
+
+#login
+{
+    text-align: center;
+}
+
+#register {
+    display: none;
+    text-align: center;
+}
+
+input
+{
+    margin: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* * * * * * * * * * * * * * * * *
+            Posur mobile
+ * * * * * * * * * * * * * * * * */
+
+@media all and (max-width: 800px)
+{
+    h1
+    {
+    font-size: 4em;
+    }
+}

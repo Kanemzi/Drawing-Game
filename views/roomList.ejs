@@ -1,0 +1,23 @@
+<% for(var i=0; i<rooms.length; i++) {
+		if (rooms[i].hasowner) {
+%>
+	<form action="account/join_room" method="post" id="<%= rooms[i].id  %>">
+		<div class="partie" <% if (!rooms[i].priv) { %> onclick="$('#<%= rooms[i].id  %>').submit()" <% } %> >
+			<span class="nom_partie"> <%- rooms[i].name %></span>
+			<span class="nom_createur"> (de <%= rooms[i].owner%>)</span>
+			<% if (rooms[i].ended) { %>
+				<span class="terminee" style="color: #d10600">&emsp;&emsp; [terminée]</span>
+			<% } else if (rooms[i].started) { %>
+				<span class="lancee" style="color: #d10600">&emsp;&emsp; [lancée]</span>
+			<% } %>
+			<input name="token" type="hidden" value="<%= rooms[i].id  %>" />
+			<% if (rooms[i].priv) { %>
+				<span class="lock"><i class="fa fa-lock" aria-hidden="true" style="display: inline-block"></i>
+					<input type="password" class="mdp_game" name="room_password" placeholder="test" />
+				</span>
+			<% } %>
+		</div>
+	</form>
+<%		}
+	}
+%>
