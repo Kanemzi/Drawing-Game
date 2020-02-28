@@ -22,7 +22,7 @@ Notre but dans ce projet a été d'impliquer au maximum les joueurs dans la cré
 ## Images du jeu
 
 <img src="https://github.com/SimonROZEC/Drawing-Game/blob/master/screenshots/connexion.png" width="500">
-Page d'accueil du jeu*<br/><br/>
+Page d'accueil du jeu<br/><br/>
 
 <img src="https://github.com/SimonROZEC/Drawing-Game/blob/master/screenshots/partie.png" width="500">
 En cours de partie  
